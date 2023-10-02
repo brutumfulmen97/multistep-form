@@ -1,17 +1,23 @@
 import { FC } from "react";
 import { MdGamepad } from "react-icons/md";
+import { IoGameControllerSharp } from "react-icons/io5";
+import { FaGamepad } from "react-icons/fa";
 
 interface PlanProps {}
 
 const Plan: FC<PlanProps> = () => {
     return (
-        <div>
+        <div className="w-full flex flex-col justify-between">
             <div>
-                <h1>Select your plan</h1>
-                <p>You have the option of monthly or yearly billing.</p>
+                <h1 className="text-2xl font-bold text-blue-900">
+                    Select your plan
+                </h1>
+                <p className="text-gray-500 text-sm mt-2">
+                    You have the option of monthly or yearly billing.
+                </p>
             </div>
-            <div>
-                <div className="outline outline-1 outline-gray-300 rounded-md flex items-center p-4 gap-8">
+            <div className="flex justify-between">
+                <div className="w-1/4  text-center justify-center outline outline-1 outline-gray-300 rounded-md flex flex-col items-center p-4 gap-4">
                     <div className="w-12 h-12 rounded-full bg-orange-400 grid place-items-center p-3">
                         <MdGamepad
                             style={{ fill: "white" }}
@@ -25,30 +31,30 @@ const Plan: FC<PlanProps> = () => {
                         <p className="text-gray-500">{/* Cena */}$9/mo</p>
                     </div>
                 </div>
-                <div className="outline outline-1 outline-gray-300 rounded-md flex items-center p-4 gap-8">
-                    <div className="w-12 h-12 rounded-full bg-orange-400 grid place-items-center p-3">
-                        <MdGamepad
+                <div className="w-1/4  text-center justify-center outline outline-1 outline-gray-300 rounded-md flex flex-col  items-center p-4 gap-4">
+                    <div className="w-12 h-12 rounded-full bg-pink-400 grid place-items-center p-3">
+                        <FaGamepad
                             style={{ fill: "white" }}
                             className="w-full h-full"
                         />
                     </div>
                     <div>
                         <h2 className="text-blue-900 text-lg font-semibold">
-                            Arcade
+                            Advanced
                         </h2>
                         <p className="text-gray-500">{/* Cena */}$9/mo</p>
                     </div>
                 </div>
-                <div className="outline outline-1 outline-gray-300 rounded-md flex items-center p-4 gap-8">
-                    <div className="w-12 h-12 rounded-full bg-orange-400 grid place-items-center p-3">
-                        <MdGamepad
+                <div className="w-1/4  text-center justify-center outline outline-1 outline-gray-300 rounded-md flex flex-col  items-center p-4 gap-4">
+                    <div className="w-12 h-12 rounded-full bg-blue-400 grid place-items-center p-3">
+                        <IoGameControllerSharp
                             style={{ fill: "white" }}
                             className="w-full h-full"
                         />
                     </div>
                     <div>
                         <h2 className="text-blue-900 text-lg font-semibold">
-                            Arcade
+                            Pro
                         </h2>
                         <p className="text-gray-500">{/* Cena */}$9/mo</p>
                     </div>
@@ -63,6 +69,14 @@ const Plan: FC<PlanProps> = () => {
                     id="flexSwitchCheckDefault"
                 />
                 <p>Yearly</p>
+            </div>
+            <div className="flex justify-between">
+                <button className="block w-24 text-sm bg-transparent text-gray-500 py-2 rounded-md">
+                    Go back
+                </button>
+                <button className="block w-24 text-sm bg-blue-900 text-white py-2 rounded-md">
+                    Next Step
+                </button>
             </div>
         </div>
     );

@@ -1,8 +1,26 @@
-import { FC } from "react";
+import { useAppState } from "../context/state";
+import { useForm } from "react-hook-form";
+import { InfoValues, infoSchema } from "../form/schema";
+import ErrorText from "../components/ErrorText";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-interface InfoProps {}
+const Info = () => {
+    const [state, setState] = useAppState();
+    const {
+        handleSubmit,
+        register,
+        formState: { errors },
+    } = useForm({
+        defaultValues: state,
+        mode: "onSubmit",
+        resolver: zodResolver(infoSchema),
+    });
 
-const Info: FC<InfoProps> = () => {
+    const saveData = (data: InfoValues) => {
+        setState({ ...state, ...data });
+        console.log(state);
+    };
+
     return (
         <div className="w-full flex flex-col justify-between">
             <div>
@@ -13,45 +31,65 @@ const Info: FC<InfoProps> = () => {
                     Please provide your name,email address, and phone number.
                 </p>
             </div>
-            <form className="flex flex-col gap-2 -mt-4">
-                <label
-                    htmlFor="name"
-                    className="block text-sm text-blue-900 font-semibold"
-                >
-                    Name
-                </label>
+            <form
+                id="info-form"
+                onSubmit={handleSubmit(saveData)}
+                className="flex flex-col gap-2 -mt-4"
+            >
+                <div className="flex justify-between">
+                    <label
+                        htmlFor="name"
+                        className="block text-sm text-blue-900 font-semibold"
+                    >
+                        Name
+                    </label>
+                    <ErrorText>{errors.name?.message as string}</ErrorText>
+                </div>
                 <input
-                    className="outline outline-gray-300 outline-1 p-2 w-full rounded-md"
+                    {...register("name", { required: true })}
+                    className="outline focus:outline-gray-600 outline-gray-300 outline-1 p-2 w-full rounded-md"
                     type="text"
-                    name="name"
+                    id="name"
                     placeholder="e.g. Vlatko Percic"
                 />
-                <label
-                    htmlFor="email"
-                    className="block text-sm text-blue-900 font-semibold"
-                >
-                    Email Address
-                </label>
+                <div className="flex justify-between">
+                    <label
+                        htmlFor="email"
+                        className="block text-sm text-blue-900 font-semibold"
+                    >
+                        Email Address
+                    </label>
+                    <ErrorText>{errors.email?.message as string}</ErrorText>
+                </div>
                 <input
-                    className="outline outline-gray-300 outline-1 p-2 w-full rounded-md"
+                    {...register("email", { required: true })}
+                    className="outline focus:outline-gray-600 outline-gray-300 outline-1 p-2 w-full rounded-md"
                     type="email"
-                    name="email"
+                    id="email"
                     placeholder="e.g. vlatko@mail.com"
                 />
-                <label
-                    htmlFor="phone"
-                    className="block text-sm text-blue-900 font-semibold"
-                >
-                    PhoneNumber
-                </label>
+                <div className="flex justify-between">
+                    <label
+                        htmlFor="phone"
+                        className="block text-sm text-blue-900 font-semibold"
+                    >
+                        PhoneNumber
+                    </label>
+                    <ErrorText>{errors.phone?.message as string}</ErrorText>
+                </div>
                 <input
-                    className="outline outline-gray-300 outline-1 p-2 w-full rounded-md"
+                    {...register("phone", { required: true })}
+                    className="outline focus:outline-gray-600 outline-gray-300 outline-1 p-2 w-full rounded-md"
                     type="text"
-                    name="phone"
+                    id="phone"
                     placeholder="e.g. +381 65 123 321"
                 />
             </form>
-            <button className="block ml-auto bg-blue-900 text-white p-2 rounded-md">
+            <button
+                type="submit"
+                form="info-form"
+                className="block text-sm w-24 ml-auto bg-blue-900 text-white py-2 rounded-md"
+            >
                 Next Step
             </button>
         </div>
