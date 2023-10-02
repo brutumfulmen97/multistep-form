@@ -4,6 +4,7 @@ import Info from "./Steps/Info";
 import Plan from "./Steps/Plan";
 import Summary from "./Steps/Summary";
 import { Stepper } from "./Steps/Stepper";
+import End from "./Steps/End";
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                             <Route path="/" element={<Info />} />
                             <Route path="/plan" element={<Plan />} />
                             <Route path="/summary" element={<Summary />} />
+                            <Route path="/end" element={<End />} />
                         </Routes>
                     </Router>
                 </AppProvider>
