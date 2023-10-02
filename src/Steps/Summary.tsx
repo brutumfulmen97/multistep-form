@@ -2,7 +2,7 @@ import { useAppState } from "../context/state";
 import { useNavigate } from "react-router-dom";
 
 const Summary = () => {
-    const [state, setState] = useAppState();
+    const [state] = useAppState();
     const navigate = useNavigate();
 
     console.log(state);

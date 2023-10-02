@@ -1,20 +1,41 @@
 import { createContext, useContext, useState } from "react";
 
-export const AppStateContext = createContext({});
+export interface AppState {
+    name?: string;
+    email?: string;
+    phone?: string;
+    plan?: string;
+    pricing?: string;
+    price?: number;
+}
+
+const initialState: AppState = {
+    name: "",
+    email: "",
+    plan: "",
+    pricing: "",
+    price: 0,
+};
+
+type AppStateContextValue = [
+    AppState,
+    React.Dispatch<React.SetStateAction<AppState>>
+];
+
+export const AppStateContext = createContext<AppStateContextValue>([
+    initialState,
+    () => null,
+]);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
-    const value = useState({});
+    const [state, setState] = useState({});
     return (
-        <AppStateContext.Provider value={value}>
+        <AppStateContext.Provider value={[state, setState]}>
             {children}
         </AppStateContext.Provider>
     );
 }
 
 export function useAppState() {
-    const context = useContext(AppStateContext);
-    if (!context) {
-        throw new Error("useAppState must be used within the AppProvider");
-    }
-    return context;
+    return useContext(AppStateContext);
 }

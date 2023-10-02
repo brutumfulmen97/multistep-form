@@ -1,6 +1,6 @@
-import { useAppState } from "../context/state";
+import { useAppState, AppState } from "../context/state";
 import { useForm } from "react-hook-form";
-import { InfoValues, infoSchema } from "../form/schema";
+import { infoSchema } from "../form/schema";
 import ErrorText from "../components/ErrorText";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ const Info = () => {
     });
     const navigate = useNavigate();
 
-    const saveData = (data: InfoValues) => {
+    const saveData = (data: AppState) => {
         setState({ ...state, ...data });
         console.log(state);
         navigate("/plan");
@@ -36,7 +36,7 @@ const Info = () => {
             </div>
             <form
                 id="info-form"
-                onSubmit={handleSubmit(saveData)}
+                onSubmit={handleSubmit((data) => saveData(data))}
                 className="flex flex-col gap-2 -mt-4"
             >
                 <div className="flex justify-between">
