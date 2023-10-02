@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { InfoValues, infoSchema } from "../form/schema";
 import ErrorText from "../components/ErrorText";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 
 const Info = () => {
     const [state, setState] = useAppState();
@@ -15,10 +16,12 @@ const Info = () => {
         mode: "onSubmit",
         resolver: zodResolver(infoSchema),
     });
+    const navigate = useNavigate();
 
     const saveData = (data: InfoValues) => {
         setState({ ...state, ...data });
         console.log(state);
+        navigate("/plan");
     };
 
     return (
