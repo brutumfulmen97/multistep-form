@@ -2,7 +2,7 @@ import { FC } from "react";
 
 interface InfoProps {}
 
-const Info: FC<InfoProps> = ({}) => {
+const Info: FC<InfoProps> = () => {
     return (
         <div className="w-full flex flex-col justify-between">
             <div>

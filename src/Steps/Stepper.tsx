@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom";
-import stepperBg from "../../public/stepper-bg.svg";
 
 export const Stepper = () => {
     const location = useLocation();

@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AppProvider } from "./context/state";
 import Info from "./Steps/Info";
-// import Plan from "./Steps/Plan";
-// import Summary from "./Steps/Summary";
+import Plan from "./Steps/Plan";
+import Summary from "./Steps/Summary";
 import { Stepper } from "./Steps/Stepper";
 
 function App() {
@@ -14,8 +14,8 @@ function App() {
                         <Stepper />
                         <Routes>
                             <Route path="/" element={<Info />} />
-                            {/* <Route path="/plan" element={<Plan />} />
-                        <Route path="/summary" element={<Summary />} /> */}
+                            <Route path="/plan" element={<Plan />} />
+                            <Route path="/summary" element={<Summary />} />
                         </Routes>
                     </Router>
                 </AppProvider>
