@@ -91,7 +91,8 @@ const Info = () => {
             <button
                 type="submit"
                 form="info-form"
-                className="block text-sm w-24 ml-auto bg-blue-900 text-white py-2 rounded-md"
+                className="block text-sm w-24 ml-auto bg-blue-900 text-white py-2 rounded-md disabled:opacity-60"
+                disabled={Object.keys(errors).length > 0}
             >
                 Next Step
             </button>

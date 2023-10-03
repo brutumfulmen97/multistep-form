@@ -12,61 +12,28 @@ const Plan = () => {
     const navigate = useNavigate();
 
     const saveData = () => {
-        if (pricing === "monthly") {
-            switch (plan) {
-                case "Arcade":
-                    setState({
-                        ...state,
-                        price: 6,
-                        pricing: "monthly",
-                        plan: "Arcade",
-                    });
-                    break;
-                case "Advanced":
-                    setState({
-                        ...state,
-                        price: 9,
-                        pricing: "monthly",
-                        plan: "Advanced",
-                    });
-                    break;
-                case "Pro":
-                    setState({
-                        ...state,
-                        price: 12,
-                        pricing: "monthly",
-                        plan: "Pro",
-                    });
-                    break;
-            }
-        } else {
-            switch (plan) {
-                case "Arcade":
-                    setState({
-                        ...state,
-                        price: 60,
-                        pricing: "yearly",
-                        plan: "Arcade",
-                    });
-                    break;
-                case "Advanced":
-                    setState({
-                        ...state,
-                        price: 90,
-                        pricing: "yearly",
-                        plan: "Advanced",
-                    });
-                    break;
-                case "Pro":
-                    setState({
-                        ...state,
-                        price: 120,
-                        pricing: "yearly",
-                        plan: "Pro",
-                    });
-                    break;
-            }
+        let price;
+        switch (plan) {
+            case "Arcade":
+                price = 6;
+                break;
+            case "Advanced":
+                price = 9;
+                break;
+            case "Pro":
+                price = 12;
+                break;
+            default:
+                price = 0;
+                break;
         }
+
+        setState({
+            ...state,
+            price: plan === "monthly" ? price : price * 10,
+            pricing,
+            plan,
+        });
 
         navigate("/summary");
     };
@@ -176,7 +143,8 @@ const Plan = () => {
                 </button>
                 <button
                     onClick={() => saveData()}
-                    className="block w-24 text-sm bg-blue-900 text-white py-2 rounded-md"
+                    className="block w-24 text-sm bg-blue-900 text-white py-2 rounded-md disabled:opacity-60"
+                    disabled={!plan}
                 >
                     Next Step
                 </button>
